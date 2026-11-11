@@ -1,0 +1,20 @@
+{
+  "name": "civic-suggestion-box",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Digital suggestion box for local governance (FastAPI + Next.js)",
+  "scripts": {
+    "dev": "pnpm --filter civic-suggestion-box-frontend dev",
+    "build": "pnpm --filter civic-suggestion-box-frontend build",
+    "start": "pnpm --filter civic-suggestion-box-frontend start",
+    "lint": "pnpm --filter civic-suggestion-box-frontend lint",
+    "typecheck": "pnpm --filter civic-suggestion-box-frontend exec tsc --noEmit"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@sentry/cli",
+      "sharp",
+      "unrs-resolver"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+packages:
+  - "frontend"
+
+# Do not re-run install automatically before every script.
+verifyDepsBeforeRun: false
+
+onlyBuiltDependencies:
+  - "sharp"
+  - "unrs-resolver"
+
+# Sentry CLI is only used to upload source maps (third-party, disabled here),
+# so its postinstall build script is intentionally not run.
+ignoredBuiltDependencies:
+  - "@sentry/cli"

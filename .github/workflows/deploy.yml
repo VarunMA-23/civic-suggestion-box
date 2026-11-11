@@ -1,0 +1,227 @@
+name: Build and Deploy
+
+on:
+  # Trigger after CI workflow completes successfully
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+    branches: [main]
+
+  # Allow manual trigger from GitHub UI or CLI
+  # GitHub UI: Actions > Build and Deploy > Run workflow (dropdown, top right)
+  # CLI: gh workflow run "Build and Deploy" -f environment=production
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+env:
+  REGISTRY: ghcr.io
+  # Uses repository name automatically (e.g., your-org/opencitivibes)
+  IMAGE_REPOSITORY: ${{ github.repository }}
+
+jobs:
+  # ============================================
+  # Build Backend
+  # ============================================
+  build-backend:
+    name: Build Backend Image
+    runs-on: ubuntu-latest
+    # Run if: CI succeeded (workflow_run) OR manual trigger (workflow_dispatch)
+    if: >
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
+      github.event_name == 'workflow_dispatch'
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image_tag: ${{ steps.meta.outputs.tags }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_REPOSITORY }}/backend
+          tags: |
+            type=sha,prefix=
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push backend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64
+
+  # ============================================
+  # Build Frontend
+  # ============================================
+  build-frontend:
+    name: Build Frontend Image
+    runs-on: ubuntu-latest
+    # Run if: CI succeeded (workflow_run) OR manual trigger (workflow_dispatch)
+    if: >
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
+      github.event_name == 'workflow_dispatch'
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image_tag: ${{ steps.meta.outputs.tags }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_REPOSITORY }}/frontend
+          tags: |
+            type=sha,prefix=
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64
+          build-args: |
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}
+            NEXT_PUBLIC_SENTRY_DSN=${{ secrets.NEXT_PUBLIC_SENTRY_DSN }}
+            NEXT_PUBLIC_BETA_MODE=${{ secrets.NEXT_PUBLIC_BETA_MODE }}
+
+  # ============================================
+  # Deploy to Staging
+  # Uses staging profile: Postfix + SQLite
+  # ============================================
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [build-backend, build-frontend]
+    # Deploy to staging: after CI success (workflow_run on main) OR manual staging deploy
+    if: >
+      (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch == 'main') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'staging')
+    environment:
+      name: staging
+    steps:
+      - name: Deploy to staging server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USER }}
+          key: ${{ secrets.STAGING_SSH_KEY }}
+          script: |
+            cd ${{ secrets.STAGING_DEPLOY_PATH }}
+
+            # Pull latest images
+            docker compose --profile staging pull
+
+            # Deploy with staging profile (Postfix + SQLite)
+            docker compose --profile staging up -d --remove-orphans
+
+            # Restart nginx to refresh upstream DNS resolution
+            docker compose --profile staging restart nginx
+
+            # Wait for health checks
+            sleep 15
+
+            # Verify deployment
+            if docker compose --profile staging ps | grep -q "unhealthy"; then
+              echo "Deployment failed - unhealthy containers"
+              docker compose --profile staging ps
+              exit 1
+            fi
+
+            # Cleanup old images
+            docker image prune -f
+
+            echo "Staging deployment successful!"
+
+  # ============================================
+  # Deploy to Production
+  # Uses prod profile: Postfix + PostgreSQL
+  # ============================================
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [build-backend, build-frontend]
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'production'
+    environment:
+      name: production
+    steps:
+      - name: Deploy to production server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PRODUCTION_HOST }}
+          username: ${{ secrets.PRODUCTION_USER }}
+          key: ${{ secrets.PRODUCTION_SSH_KEY }}
+          script: |
+            cd ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+
+            # Create backup before deployment
+            ./scripts/backup.sh
+
+            # Pull latest images
+            docker compose --profile prod pull
+
+            # Deploy with prod profile (Postfix + PostgreSQL)
+            docker compose --profile prod up -d --remove-orphans
+
+            # Restart nginx to refresh upstream DNS resolution
+            docker compose --profile prod restart nginx
+
+            # Wait for health checks
+            sleep 20
+
+            # Verify deployment
+            if docker compose --profile prod ps | grep -q "unhealthy"; then
+              echo "Deployment failed - unhealthy containers"
+              docker compose --profile prod ps
+              exit 1
+            fi
+
+            # Cleanup old images
+            docker image prune -f
+
+            echo "Production deployment successful!"

@@ -1,0 +1,91 @@
+{
+  "platform": {
+    "name": "Bengaluru Civic Suggestion Box",
+    "version": "1.0.0"
+  },
+  "instance": {
+    "name": {
+      "en": "Bengaluru Civic Suggestion Box"
+    },
+    "entity": {
+      "type": "city",
+      "name": {
+        "en": "Bruhat Bengaluru Mahanagara Palike (BBMP)"
+      },
+      "region": {
+        "en": "Karnataka"
+      },
+      "country": {
+        "en": "India"
+      }
+    },
+    "location": {
+      "display": {
+        "en": "Bengaluru"
+      },
+      "coordinates": {
+        "lat": 12.9716,
+        "lng": 77.5946
+      },
+      "timezone": "Asia/Kolkata"
+    }
+  },
+  "contact": {
+    "email": "suggestions@bengaluru.example",
+    "support_email": "support@bengaluru.example"
+  },
+  "legal": {
+    "jurisdiction": {
+      "en": "Bengaluru, Karnataka, India"
+    },
+    "courts": {
+      "en": "competent courts in Bengaluru, Karnataka, India"
+    },
+    "privacy_authority": {
+      "name": {
+        "en": "Data Protection Board of India"
+      },
+      "acronym": "DPBI",
+      "url": "https://www.meity.gov.in/data-protection-framework"
+    },
+    "data_protection_laws": [
+      {
+        "name": "Digital Personal Data Protection Act, 2023",
+        "description": {
+          "en": "India's Digital Personal Data Protection Act, 2023 (DPDP Act)"
+        }
+      }
+    ]
+  },
+  "branding": {
+    "primary_color": "#1F6F5C",
+    "secondary_color": "#C97B5A",
+    "accent": "#E9B44C",
+    "success": "#3F8F5F",
+    "warning": "#C99A3F",
+    "error": "#B4534B",
+    "border_radius": "lg",
+    "fonts": {
+      "heading": "Inter",
+      "body": "Inter"
+    },
+    "hero_overlay": true,
+    "dark_mode": {
+      "primary": "#4FB39A",
+      "background": "#121A17",
+      "surface": "#1A2420"
+    }
+  },
+  "localization": {
+    "default_locale": "en",
+    "supported_locales": ["en"],
+    "date_format": {
+      "en": "dd/MM/yyyy"
+    }
+  },
+  "features": {
+    "map": true,
+    "images": true,
+    "officials": true
+  }
+}
