@@ -1,14 +1,14 @@
 {
-  "name": "Idées pour Montréal",
-  "short_name": "Idées MTL",
-  "description": "Partagez vos idées pour améliorer la vie à Montréal",
+  "name": "Bengaluru Civic Suggestion Box",
+  "short_name": "Bengaluru Civic",
+  "description": "Share your ideas to improve life in Bengaluru",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#0066CC",
+  "background_color": "#F7F6F2",
+  "theme_color": "#1F6F5C",
   "orientation": "portrait-primary",
   "scope": "/",
-  "lang": "fr-CA",
+  "lang": "en",
   "icons": [
     {
       "src": "/icons/icon-72x72.png",

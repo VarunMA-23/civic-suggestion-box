@@ -209,7 +209,7 @@ export default function SubmitIdeaPage() {
               <FormHelp
                 content={t(
                   'ideas.descriptionHelpExtended',
-                  'Describe your idea in detail: the problem it solves, how it works, and the benefits for Montreal citizens.'
+                  'Describe your idea in detail: the problem it solves, how it works, and the benefits for Bengaluru citizens.'
                 )}
               />
             </div>

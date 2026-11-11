@@ -6,28 +6,28 @@ import TermsPageClient from '@/components/pages/TermsPageClient';
 
 export const metadata: Metadata = generateStaticMetadata(
   {
-    fr: "Conditions d'utilisation",
     en: 'Terms of Service',
+    fr: "Conditions d'utilisation",
   },
   {
-    fr: "Conditions d'utilisation de Idées pour Montréal. Règles de conduite et responsabilités des utilisateurs.",
-    en: 'Terms of Service for Ideas for Montreal. Code of conduct and user responsibilities.',
+    en: `Terms of Service for ${siteConfig.name.en}. Code of conduct and user responsibilities.`,
+    fr: `Conditions d'utilisation de ${siteConfig.name.fr}. Règles de conduite et responsabilités des utilisateurs.`,
   },
-  'fr',
+  'en',
   '/terms'
 );
 
 const pageSchema = generateWebPageSchema(
-  "Conditions d'utilisation",
-  "Conditions d'utilisation de Idées pour Montréal.",
+  'Terms of Service',
+  `Terms of Service for ${siteConfig.name.en}.`,
   `${siteConfig.url}/terms`,
   'WebPage',
-  'fr'
+  'en'
 );
 
 const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: 'Accueil', url: siteConfig.url },
-  { name: "Conditions d'utilisation", url: `${siteConfig.url}/terms` },
+  { name: 'Home', url: siteConfig.url },
+  { name: 'Terms of Service', url: `${siteConfig.url}/terms` },
 ]);
 
 export default function TermsPage() {

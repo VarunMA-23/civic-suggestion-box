@@ -47,27 +47,27 @@ export function generateOrganizationSchema(): WithContext<'Organization'> {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: siteConfig.name.fr,
-    alternateName: siteConfig.name.en,
+    name: siteConfig.name.en,
+    alternateName: siteConfig.name.fr,
     url: siteConfig.url,
     logo: `${siteConfig.url}/logo.png`,
-    description: siteConfig.description.fr,
+    description: siteConfig.description.en,
     foundingLocation: {
       '@type': 'Place',
-      name: 'Montreal, Quebec, Canada',
+      name: 'Bengaluru, Karnataka, India',
       address: {
         '@type': 'PostalAddress',
-        addressLocality: 'Montreal',
-        addressRegion: 'Quebec',
-        addressCountry: 'CA',
+        addressLocality: 'Bengaluru',
+        addressRegion: 'Karnataka',
+        addressCountry: 'IN',
       },
     },
     areaServed: {
       '@type': 'City',
-      name: 'Montreal',
+      name: 'Bengaluru',
       containedInPlace: {
         '@type': 'AdministrativeArea',
-        name: 'Quebec',
+        name: 'Karnataka',
       },
     },
     sameAs: [
@@ -186,7 +186,7 @@ export function generateIdeaSchema(
     },
     locationCreated: {
       '@type': 'City',
-      name: 'Montreal',
+      name: 'Bengaluru',
     },
   };
 }
@@ -197,7 +197,7 @@ export function generateCollectionPageSchema(
   description: string,
   url: string,
   itemCount: number,
-  locale: string = 'fr'
+  locale: string = 'en'
 ): WithContext<'CollectionPage'> {
   return {
     '@context': 'https://schema.org',

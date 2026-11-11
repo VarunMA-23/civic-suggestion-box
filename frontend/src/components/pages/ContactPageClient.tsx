@@ -10,7 +10,7 @@ import { contactAPI, type ContactSubject } from '@/lib/api';
 export default function ContactPageClient() {
   const { t, i18n } = useTranslation();
   const { config } = usePlatformConfig();
-  const contactEmail = config?.contact.email || 'contact@opencitivibes.local';
+  const contactEmail = config?.contact.email || 'suggestions@bengaluru.example';
   const [formState, setFormState] = useState({
     name: '',
     email: '',

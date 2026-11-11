@@ -4,29 +4,29 @@ import { initReactI18next } from 'react-i18next';
 // Dynamic import for translations - only loads the needed language
 const loadTranslations = async (language: string) => {
   switch (language) {
-    case 'en':
-      return (await import('./locales/en.json')).default;
+    case 'fr':
+      return (await import('./locales/fr.json')).default;
     case 'es':
       return (await import('./locales/es.json')).default;
-    case 'fr':
+    case 'en':
     default:
-      return (await import('./locales/fr.json')).default;
+      return (await import('./locales/en.json')).default;
   }
 };
 
-// Get initial language from localStorage or default to 'fr'
+// Get initial language from localStorage or default to 'en'
 const getInitialLanguage = (): string => {
   if (typeof window !== 'undefined') {
-    return localStorage.getItem('i18nextLng') || 'fr';
+    return localStorage.getItem('i18nextLng') || 'en';
   }
-  return 'fr';
+  return 'en';
 };
 
 // Initialize with empty resources - will be loaded dynamically
 i18n.use(initReactI18next).init({
   resources: {},
   lng: getInitialLanguage(),
-  fallbackLng: 'fr',
+  fallbackLng: 'en',
   interpolation: {
     escapeValue: false,
   },

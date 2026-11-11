@@ -3,7 +3,7 @@ import { ImageResponse } from 'next/og';
 export const runtime = 'edge';
 
 // Read from environment (could also fetch from API)
-const instanceName = process.env.NEXT_PUBLIC_INSTANCE_NAME || 'OpenCitiVibes';
+const instanceName = process.env.NEXT_PUBLIC_INSTANCE_NAME || 'Bengaluru Civic Suggestion Box';
 
 export const alt = instanceName;
 export const size = {
@@ -13,9 +13,9 @@ export const size = {
 export const contentType = 'image/png';
 
 export default async function OGImage() {
-  const tagline = process.env.NEXT_PUBLIC_TAGLINE || 'Share your ideas';
-  const primaryColor = process.env.NEXT_PUBLIC_PRIMARY_COLOR || '#0066CC';
-  const secondaryColor = process.env.NEXT_PUBLIC_SECONDARY_COLOR || '#003366';
+  const tagline = process.env.NEXT_PUBLIC_TAGLINE || 'Share your ideas to improve Bengaluru';
+  const primaryColor = process.env.NEXT_PUBLIC_PRIMARY_COLOR || '#1F6F5C';
+  const secondaryColor = process.env.NEXT_PUBLIC_SECONDARY_COLOR || '#121A17';
 
   return new ImageResponse(
     <div

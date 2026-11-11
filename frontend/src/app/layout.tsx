@@ -37,13 +37,12 @@ const siteConfig = getSiteConfig();
 
 // Enhanced metadata with language alternates
 export const metadata: Metadata = {
-  ...getBaseMetadata('fr'),
+  ...getBaseMetadata('en'),
   manifest: '/manifest.json',
   alternates: {
     canonical: siteConfig.url,
     languages: {
-      'fr-CA': siteConfig.url,
-      'en-CA': siteConfig.url,
+      'en': siteConfig.url,
       'x-default': siteConfig.url,
     },
   },
@@ -52,8 +51,8 @@ export const metadata: Metadata = {
 // Viewport configuration
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#0066CC' },
-    { media: '(prefers-color-scheme: dark)', color: '#003366' },
+    { media: '(prefers-color-scheme: light)', color: '#1F6F5C' },
+    { media: '(prefers-color-scheme: dark)', color: '#4FB39A' },
   ],
   width: 'device-width',
   initialScale: 1,
@@ -65,10 +64,10 @@ const globalSchemas = combineSchemas(generateWebSiteSchema(), generateOrganizati
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-  const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'fr';
+  const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
 
   return (
-    <html lang={`${defaultLocale}-CA`} className={inter.variable} suppressHydrationWarning>
+    <html lang={defaultLocale} className={inter.variable} suppressHydrationWarning>
       <head>
         {/* Preconnect to critical origins for faster requests */}
         <link rel="preconnect" href={apiUrl} />

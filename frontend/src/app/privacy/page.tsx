@@ -6,28 +6,28 @@ import PrivacyPageClient from '@/components/pages/PrivacyPageClient';
 
 export const metadata: Metadata = generateStaticMetadata(
   {
-    fr: 'Politique de confidentialité',
     en: 'Privacy Policy',
+    fr: 'Politique de confidentialité',
   },
   {
-    fr: 'Politique de confidentialité de Idées pour Montréal. Découvrez comment nous protégeons vos données personnelles.',
-    en: 'Privacy Policy for Ideas for Montreal. Learn how we protect your personal data.',
+    en: `Privacy Policy for ${siteConfig.name.en}. Learn how we protect your personal data under the Digital Personal Data Protection Act.`,
+    fr: `Politique de confidentialité de ${siteConfig.name.fr}. Découvrez comment nous protégeons vos données personnelles.`,
   },
-  'fr',
+  'en',
   '/privacy'
 );
 
 const pageSchema = generateWebPageSchema(
-  'Politique de confidentialité',
-  'Politique de confidentialité de Idées pour Montréal.',
+  'Privacy Policy',
+  `Privacy Policy for ${siteConfig.name.en}.`,
   `${siteConfig.url}/privacy`,
   'WebPage',
-  'fr'
+  'en'
 );
 
 const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: 'Accueil', url: siteConfig.url },
-  { name: 'Politique de confidentialité', url: `${siteConfig.url}/privacy` },
+  { name: 'Home', url: siteConfig.url },
+  { name: 'Privacy Policy', url: `${siteConfig.url}/privacy` },
 ]);
 
 export default function PrivacyPage() {

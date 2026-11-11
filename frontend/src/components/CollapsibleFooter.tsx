@@ -103,7 +103,7 @@ export default function CollapsibleFooter() {
             >
               {instanceName}{' '}
               <span className="text-primary-300 font-normal">
-                {t('footer.poweredBy')} <span className="text-primary-200">OpenCitiVibes</span>
+                {t('footer.poweredBy')} <span className="text-primary-200">Civic Suggestion Box</span>
               </span>
             </span>
           </Link>

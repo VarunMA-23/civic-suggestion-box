@@ -1,16 +1,16 @@
 ---
 version: "2.0"
 lastUpdated: "2026-01-11"
-changelog: "Added section on collection of data from minors (Law 25)"
+changelog: "Updated data protection framework to DPDP Act 2023"
 ---
 
 # Privacy Policy
 
-{{instanceName}} is committed to protecting your privacy in accordance with applicable data protection laws.
+{{instanceName}} is committed to protecting your privacy in accordance with applicable data protection laws, including India's Digital Personal Data Protection Act, 2023 (DPDP Act).
 
-## 1. Data Controller
+## 1. Data Fiduciary
 
-{{instanceName}} is the data controller responsible for your personal data. For any questions regarding this policy, you can contact us at {{contactEmail}}.
+{{instanceName}} is the Data Fiduciary responsible for your personal data. For any questions regarding this policy, you can contact us at {{contactEmail}}.
 
 ## 2. Data Collected
 
@@ -18,14 +18,14 @@ We collect the following information:
 
 - **Registration data**: username, email address, display name, date of birth
 - **Profile data**: avatar (optional)
-- **User-generated content**: submitted ideas, comments, votes
+- **User-generated content**: submitted ideas, location data (coordinates, neighborhood), comments, votes
 - **Technical data**: IP address, browser type, pages visited
 
 ## 3. Collection of Data from Minors
 
 ### Applicability
 
-This section applies to users under 14 years of age at the time of registration, in accordance with Quebec's Law 25 on the protection of personal information.
+This section applies to users under 18 years of age at the time of registration, in accordance with applicable child privacy guidelines under the Digital Personal Data Protection Act.
 
 ### Data Collected from Minors
 

@@ -13,11 +13,11 @@ export const revalidate = 3600;
 
 // Metadata is generated at build time, use environment fallbacks
 export function generateMetadata(): Metadata {
-  const instanceName = process.env.NEXT_PUBLIC_INSTANCE_NAME || 'OpenCitiVibes';
-  const tagline = process.env.NEXT_PUBLIC_TAGLINE || 'Citizen platform for ideas';
+  const instanceName = process.env.NEXT_PUBLIC_INSTANCE_NAME || 'Bengaluru Civic Suggestion Box';
+  const tagline = process.env.NEXT_PUBLIC_TAGLINE || 'Citizen platform for ideas and community initiatives';
 
   return {
-    ...getBaseMetadata('fr'),
+    ...getBaseMetadata('en'),
     title: instanceName,
     description: tagline,
     openGraph: {
@@ -31,11 +31,11 @@ export function generateMetadata(): Metadata {
 const siteConfig = getSiteConfig();
 
 const collectionSchema = generateCollectionPageSchema(
-  siteConfig.name.fr ?? siteConfig.name.en ?? 'OpenCitiVibes',
-  siteConfig.description.fr ?? siteConfig.description.en ?? 'Citizen platform for ideas',
+  siteConfig.name.en ?? 'Bengaluru Civic Suggestion Box',
+  siteConfig.description.en ?? 'Citizen platform for ideas',
   siteConfig.url,
   100,
-  'fr'
+  'en'
 );
 
 export default function HomePage() {

@@ -42,8 +42,8 @@ export function useConfigTranslation() {
    * Get instance name in current locale.
    */
   const instanceName = useMemo(() => {
-    if (!config) return 'OpenCitiVibes';
-    return config.instance.name[i18n.language] || config.instance.name['en'] || 'OpenCitiVibes';
+    if (!config) return 'Bengaluru Civic Suggestion Box';
+    return config.instance.name[i18n.language] || config.instance.name['en'] || 'Bengaluru Civic Suggestion Box';
   }, [config, i18n.language]);
 
   /**

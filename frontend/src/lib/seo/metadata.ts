@@ -100,13 +100,13 @@ export function getSiteConfig(): SiteConfig {
 
   // Fallback for SSR before client-side hydration
   return {
-    name: { en: 'Ideas for Montreal', fr: 'Idées pour Montréal' },
+    name: { en: 'Bengaluru Civic Suggestion Box', fr: 'Boîte à idées civique de Bengaluru' },
     description: {
-      en: 'Share your ideas to improve life in Montreal. Citizen platform to submit, discuss, and vote on innovative ideas.',
-      fr: 'Partagez vos idées pour améliorer la vie à Montréal. Plateforme citoyenne pour proposer, discuter et voter sur des idées innovantes.',
+      en: 'Share your ideas to improve life in Bengaluru. Citizen platform to submit, discuss, and vote on innovative civic ideas.',
+      fr: 'Partagez vos idées pour améliorer la vie à Bengaluru. Plateforme citoyenne pour proposer, discuter et voter sur des idées civiques.',
     },
     url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
-    locale: { default: 'fr_CA', alternate: 'en_CA' },
+    locale: { default: 'en_IN', alternate: 'en_US' },
     images: {
       og: '/opengraph-image',
       twitter: '/twitter-image',
@@ -120,9 +120,9 @@ export function getSiteConfig(): SiteConfig {
 export const siteConfig = getSiteConfig();
 
 // Base metadata shared across all pages
-export function getBaseMetadata(locale: string = 'fr'): Metadata {
+export function getBaseMetadata(locale: string = 'en'): Metadata {
   const config = getSiteConfig();
-  const siteName = config.name[locale] ?? config.name.en ?? 'OpenCitiVibes';
+  const siteName = config.name[locale] ?? config.name.en ?? 'Bengaluru Civic Suggestion Box';
   const siteDescription =
     config.description[locale] ?? config.description.en ?? 'Citizen ideas platform';
 

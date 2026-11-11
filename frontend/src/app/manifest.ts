@@ -5,7 +5,7 @@ import { MetadataRoute } from 'next';
  * Uses environment variables for instance-specific configuration.
  */
 export default function manifest(): MetadataRoute.Manifest {
-  const name = process.env.NEXT_PUBLIC_INSTANCE_NAME || 'OpenCitiVibes';
+  const name = process.env.NEXT_PUBLIC_INSTANCE_NAME || 'Bengaluru Civic Suggestion Box';
   const shortName = process.env.NEXT_PUBLIC_INSTANCE_SHORT_NAME || 'OCV';
   const description = process.env.NEXT_PUBLIC_TAGLINE || 'Citizen platform for sharing ideas';
   const themeColor = process.env.NEXT_PUBLIC_THEME_COLOR || '#0066CC';

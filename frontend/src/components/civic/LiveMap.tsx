@@ -15,7 +15,7 @@ export interface LiveMapProps {
   className?: string;
 }
 
-const DEFAULT_CENTER: [number, number] = [20, 0];
+const DEFAULT_CENTER: [number, number] = [12.9716, 77.5946];
 
 const pinIcon = L.divIcon({
   className: '',
@@ -43,8 +43,9 @@ export function LiveMap({ items, height = 560, className = '' }: LiveMapProps) {
   const { config } = usePlatformConfig();
 
   const center = useMemo<[number, number]>(() => {
-    if (items.length > 0) {
-      return [items[0].latitude, items[0].longitude];
+    const firstItem = items[0];
+    if (firstItem) {
+      return [firstItem.latitude, firstItem.longitude];
     }
     const coords = config?.instance?.location?.coordinates;
     if (coords && (coords.lat !== 0 || coords.lng !== 0)) {

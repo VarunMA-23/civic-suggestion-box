@@ -94,11 +94,11 @@ const PlatformConfigContext = createContext<PlatformConfigContextType | null>(nu
 
 function getFallbackConfig(): PlatformConfig {
   // Use environment variables for fallback values
-  const instanceName = process.env.NEXT_PUBLIC_INSTANCE_NAME || 'OpenCitiVibes';
-  const entityName = process.env.NEXT_PUBLIC_ENTITY_NAME || '';
+  const instanceName = process.env.NEXT_PUBLIC_INSTANCE_NAME || 'Bengaluru Civic Suggestion Box';
+  const entityName = process.env.NEXT_PUBLIC_ENTITY_NAME || 'Bruhat Bengaluru Mahanagara Palike (BBMP)';
 
   return {
-    platform: { name: 'OpenCitiVibes' },
+    platform: { name: 'Bengaluru Civic Suggestion Box' },
     instance: {
       name: { en: instanceName, fr: instanceName },
       entity: {
@@ -106,15 +106,23 @@ function getFallbackConfig(): PlatformConfig {
         name: { en: entityName, fr: entityName },
       },
       location: {
-        display: { en: '', fr: '' },
+        display: { en: 'Bengaluru', fr: 'Bengaluru' },
+        coordinates: {
+          lat: 12.9716,
+          lng: 77.5946,
+        },
       },
     },
     localization: {
-      default_locale: process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'fr',
-      supported_locales: ['fr', 'en'],
+      default_locale: process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en',
+      supported_locales: ['en', 'fr'],
     },
-    features: {},
-    contact: { email: 'contact@opencitivibes.local' },
+    features: {
+      map: true,
+      images: true,
+      officials: true,
+    },
+    contact: { email: 'suggestions@bengaluru.example' },
   };
 }
 
@@ -190,8 +198,8 @@ export function PlatformConfigProvider({ children }: { children: ReactNode }) {
   };
 
   const instanceName = config
-    ? getLocalizedValue(config.instance.name, 'OpenCitiVibes')
-    : 'OpenCitiVibes';
+    ? getLocalizedValue(config.instance.name, 'Bengaluru Civic Suggestion Box')
+    : 'Bengaluru Civic Suggestion Box';
 
   const entityName = config ? getLocalizedValue(config.instance.entity.name, '') : '';
 

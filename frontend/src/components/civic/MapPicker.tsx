@@ -23,7 +23,7 @@ export interface MapPickerProps {
   height?: number;
 }
 
-const DEFAULT_CENTER: [number, number] = [20, 0];
+const DEFAULT_CENTER: [number, number] = [12.9716, 77.5946];
 
 const pinIcon = L.divIcon({
   className: '',

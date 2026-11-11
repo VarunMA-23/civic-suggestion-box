@@ -15,12 +15,12 @@ export async function generateMetadata({
 
   if (!idea) {
     return {
-      title: 'Idée non trouvée',
-      description: "Cette idée n'existe pas ou a été supprimée.",
+      title: 'Idea Not Found',
+      description: 'This idea does not exist or has been removed.',
     };
   }
 
-  return generateIdeaMetadata(idea, 'fr');
+  return generateIdeaMetadata(idea, 'en');
 }
 
 // Enable static generation for popular ideas
@@ -43,10 +43,10 @@ export default async function IdeaDetailPage({ params }: { params: Promise<{ id:
   }
 
   // Generate structured data for approved ideas
-  const ideaSchema = generateIdeaSchema(idea, 'fr');
+  const ideaSchema = generateIdeaSchema(idea, 'en');
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Accueil', url: siteConfig.url },
-    { name: idea.category_name_fr || 'Idées', url: siteConfig.url },
+    { name: 'Home', url: siteConfig.url },
+    { name: idea.category_name_en || 'Ideas', url: siteConfig.url },
     { name: idea.title, url: `${siteConfig.url}/ideas/${idea.id}` },
   ]);
 

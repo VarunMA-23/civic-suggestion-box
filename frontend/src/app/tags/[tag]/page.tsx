@@ -14,7 +14,7 @@ export async function generateMetadata({
   const decodedTag = decodeURIComponent(tag);
   const stats = await serverTagAPI.getStatsByName(decodedTag);
 
-  return generateTagMetadata(decodedTag, stats?.approved_ideas || 0, 'fr');
+  return generateTagMetadata(decodedTag, stats?.approved_ideas || 0, 'en');
 }
 
 export default async function TagPage({ params }: { params: Promise<{ tag: string }> }) {
@@ -24,15 +24,15 @@ export default async function TagPage({ params }: { params: Promise<{ tag: strin
 
   const collectionSchema = generateCollectionPageSchema(
     `#${decodedTag}`,
-    `Idées étiquetées avec #${decodedTag}`,
+    `Ideas tagged with #${decodedTag}`,
     `${siteConfig.url}/tags/${tag}`,
     stats?.approved_ideas || 0,
-    'fr'
+    'en'
   );
 
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Accueil', url: siteConfig.url },
-    { name: 'Étiquettes', url: `${siteConfig.url}/tags` },
+    { name: 'Home', url: siteConfig.url },
+    { name: 'Tags', url: `${siteConfig.url}/tags` },
     { name: `#${decodedTag}`, url: `${siteConfig.url}/tags/${tag}` },
   ]);
 

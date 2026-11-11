@@ -9,7 +9,7 @@ export default function Footer() {
   const { t, instanceName, entityName } = useConfigTranslation();
   const { config } = usePlatformConfig();
   const currentYear = new Date().getFullYear();
-  const contactEmail = config?.contact.email || 'contact@opencitivibes.local';
+  const contactEmail = config?.contact.email || 'suggestions@bengaluru.example';
   const logoSrc = config?.branding?.logo || '/static/images/logo_tr3.svg';
 
   // Build description with entity name
@@ -117,7 +117,7 @@ export default function Footer() {
             <span className="hidden sm:inline text-primary-500">|</span>
             <p className="text-xs sm:text-sm text-primary-400" suppressHydrationWarning>
               {instanceName} {t('footer.poweredBy')}{' '}
-              <span className="font-semibold text-primary-200">OpenCitiVibes</span>
+              <span className="font-semibold text-primary-200">Civic Suggestion Box</span>
             </p>
           </div>
           <div className="flex items-center space-x-3 sm:space-x-4">

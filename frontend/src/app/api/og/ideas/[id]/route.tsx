@@ -66,7 +66,7 @@ async function fetchIdea(id: string): Promise<IdeaData | null> {
 
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const instanceName = process.env.NEXT_PUBLIC_INSTANCE_NAME || 'OpenCitiVibes';
+  const instanceName = process.env.NEXT_PUBLIC_INSTANCE_NAME || 'Bengaluru Civic Suggestion Box';
   const locale = request.nextUrl.searchParams.get('locale') || 'fr';
 
   const idea = await fetchIdea(id);

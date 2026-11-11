@@ -1588,7 +1588,7 @@ def root() -> dict:
     instance_name = get_instance_name(config.localization.default_locale)
     return {
         "message": f"Welcome to {instance_name} API",
-        "platform": config.platform.get("name", "OpenCitiVibes"),
+        "platform": config.platform.get("name", "Civic Suggestion Box"),
         "version": config.platform.get("version", "1.0.0"),
     }
 

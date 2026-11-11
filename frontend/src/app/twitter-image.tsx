@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
 
-export const alt = 'Idées pour Montréal';
+export const alt = 'Bengaluru Civic Suggestion Box';
 export const size = {
   width: 1200,
   height: 600,
@@ -13,7 +13,7 @@ export default async function TwitterImage() {
   return new ImageResponse(
     <div
       style={{
-        background: 'linear-gradient(135deg, #0066CC 0%, #003366 100%)',
+        background: 'linear-gradient(135deg, #1F6F5C 0%, #121A17 100%)',
         width: '100%',
         height: '100%',
         display: 'flex',
@@ -31,7 +31,7 @@ export default async function TwitterImage() {
           marginBottom: 16,
         }}
       >
-        Idées pour Montréal
+        Bengaluru Civic Suggestion Box
       </div>
       <div
         style={{
@@ -40,7 +40,7 @@ export default async function TwitterImage() {
           textAlign: 'center',
         }}
       >
-        Plateforme citoyenne pour améliorer Montréal
+        Citizen platform to improve Bengaluru
       </div>
     </div>,
     {

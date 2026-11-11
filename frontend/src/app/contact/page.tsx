@@ -8,28 +8,28 @@ const siteConfig = getSiteConfig();
 
 export const metadata: Metadata = generateStaticMetadata(
   {
-    fr: 'Nous contacter',
     en: 'Contact Us',
+    fr: 'Nous contacter',
   },
   {
-    fr: `Contactez ${siteConfig.name.fr}. Questions, suggestions ou signalement de problèmes.`,
     en: `Contact ${siteConfig.name.en}. Questions, suggestions, or report issues.`,
+    fr: `Contactez ${siteConfig.name.fr}. Questions, suggestions ou signalement de problèmes.`,
   },
-  'fr',
+  'en',
   '/contact'
 );
 
 const pageSchema = generateWebPageSchema(
-  'Nous contacter',
-  `Contactez ${siteConfig.name.fr}.`,
+  'Contact Us',
+  `Contact ${siteConfig.name.en}.`,
   `${siteConfig.url}/contact`,
   'ContactPage',
-  'fr'
+  'en'
 );
 
 const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: 'Accueil', url: siteConfig.url },
-  { name: 'Nous contacter', url: `${siteConfig.url}/contact` },
+  { name: 'Home', url: siteConfig.url },
+  { name: 'Contact Us', url: `${siteConfig.url}/contact` },
 ]);
 
 export default function ContactPage() {
